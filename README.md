@@ -148,4 +148,4 @@ If you use this workflow, please cite the article (see `CITATION.cff`) and the i
 
 ## License
 
-Released under the MIT License (see `LICENSE`).
+Released under the X License (see `LICENSE`).
