@@ -1,0 +1,15 @@
+# Inputs / outputs are not version-controlled
+data/*
+!data/README.md
+results/*
+!results/README.md
+# Common large/intermediate files
+*.bam
+*.sam
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.gfa
+__pycache__/
+.DS_Store

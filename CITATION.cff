@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this workflow, please cite the associated article."
+title: "Genome-to-bench workflow for Bacillus nitratireducens STRAIN53"
+authors:
+  - family-names: Rodrigues
+    given-names: Marcus Vinicius da Silva
+  - family-names: Garcia
+    given-names: Angelo Barreiro
+  - family-names: Gouveia
+    given-names: Paula de Oliveira
+  - family-names: Oliveira
+    given-names: João Paulo de
+  - family-names: Nicoletto
+    given-names: Maria Luiza Abreu
+  - family-names: Noriler
+    given-names: Sandriele
+  - family-names: Oliveira Junior
+    given-names: Admilton Gonçalves de
+  - family-names: Rocha
+    given-names: Ulisses Nunes da
+  - family-names: Bressan
+    given-names: Glaucia Maria
+preferred-citation:
+  type: article
+  title: "An integrated genome-to-bench workflow for identifying candidate biofertilizer strains: application to Bacillus nitratireducens STRAIN53"
+  authors:
+    - family-names: Rodrigues
+      given-names: Marcus Vinicius da Silva
+  year: 2025
+  notes: "Update journal, volume, pages and DOI on publication."

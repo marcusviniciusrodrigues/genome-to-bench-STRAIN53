@@ -1,0 +1,31 @@
+# Conda environment for the command-line tools of the genome-to-bench workflow.
+# Create with:  conda env create -f environment.yml
+# Some steps use GUI/web services (MEGA X, PhyloSuite, Proksee/CGView,
+# Galaxy/PlasFlow, iTOL, FigTree, CLC Genomics Workbench) and are NOT installed here;
+# they are documented in docs/.
+name: genome-to-bench
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.9
+  - trimmomatic=0.39
+  - spades=3.13
+  - blast            # provides blastn / tblastn (local); NCBI web BLAST also used
+  - gtdbtk
+  - ragtag=2.1
+  - busco=5.7.1
+  - quast
+  - prokka=1.14.6
+  - roary
+  - mafft            # optional: CLI alternative to MAFFT online
+  - iqtree           # ML; in the paper run via PhyloSuite
+  - mrbayes=3.2.1
+  - pip
+  - pip:
+      - ANIclustermap   # OrthoANI heatmap + clustering (Fig 2A)
+      - cogclassifier   # COG functional classification (Fig 3B)
+# Notes:
+# - MeDuSa v1.0 is distributed as a Java package by the authors (not on bioconda);
+#   install separately from https://github.com/combogenomics/medusa
+# - GTDB-Tk requires its reference database (set GTDBTK_DATA_PATH).
