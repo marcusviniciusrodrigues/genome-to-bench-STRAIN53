@@ -1,4 +1,4 @@
-# Genome-to-Bench Workflow — *Bacillus nitratireducens* STRAIN53
+# Genome-to-Bench Workflow
 
 Reproducible, step-by-step pipeline accompanying the article:
 
