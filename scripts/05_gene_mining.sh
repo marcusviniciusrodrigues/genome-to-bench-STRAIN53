@@ -1,12 +1,19 @@
 #!/usr/bin/env bash
-# Stage 5 — tBLASTn of mined PGPR genes vs STRAIN53 genome. See docs/05_*
+# Stage 5 - tBLASTn of curated PGPR targets against the focal genome.
 set -euo pipefail
-mkdir -p results/blastdb
-ASM=results/ragtag_STRAIN53/ragtag.scaffold.fasta
-QUERY=data/mined_genes/pgpr_targets.faa   # multi-FASTA from UniProt
+source "$(dirname "$0")/common.sh"
 
-makeblastdb -in "$ASM" -dbtype nucl -out results/blastdb/STRAIN53
-tblastn -query "$QUERY" -db results/blastdb/STRAIN53 \
+SAMPLE_ID=${SAMPLE_ID:-$(config_get project.focal_sample_id)}
+RESULTS_DIR=$(config_get paths.results_dir)
+QUERY=$(config_get paths.pgpr_targets)
+ASM="$RESULTS_DIR/ragtag_$SAMPLE_ID/ragtag.scaffold.fasta"
+BLAST_DIR="$RESULTS_DIR/blastdb"
+OUT="$RESULTS_DIR/tblastn_$SAMPLE_ID.tsv"
+
+mkdir -p "$BLAST_DIR"
+
+makeblastdb -in "$ASM" -dbtype nucl -out "$BLAST_DIR/$SAMPLE_ID"
+tblastn -query "$QUERY" -db "$BLAST_DIR/$SAMPLE_ID" \
   -outfmt "6 qseqid sseqid pident length qcovs evalue bitscore" \
-  -out results/tblastn_STRAIN53.tsv   # -> Table 2
-echo "[done] stage 5 -> results/tblastn_STRAIN53.tsv"
+  -out "$OUT"
+echo "[done] stage 5 -> $OUT"
