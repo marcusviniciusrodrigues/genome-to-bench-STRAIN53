@@ -1,0 +1,6 @@
+taxon_id	marker	sequence_accession	assembly_accession	extraction_method	status
+LABIM53	16S rRNA	derived_from_assembly	JBLFHU000000000	TO_CONFIRM	TO_CONFIRM
+LABIM53	gyrB	derived_from_assembly	JBLFHU000000000	TO_CONFIRM	TO_CONFIRM
+TO_CONFIRM	16S rRNA	TO_CONFIRM	TO_CONFIRM	TO_CONFIRM	TO_CONFIRM
+TO_CONFIRM	gyrB	TO_CONFIRM	TO_CONFIRM	TO_CONFIRM	TO_CONFIRM
+
