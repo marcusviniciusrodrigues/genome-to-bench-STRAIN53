@@ -1,0 +1,14 @@
+description: >-
+  Reproducible genome-to-bench documentation and command templates for
+  Bacillus nitratireducens LABIM53, from Illumina reads to PGPR validation.
+topics:
+  - bacterial-genomics
+  - biofertilizer
+  - comparative-genomics
+  - pgpr
+  - pangenome
+  - phylogeny
+  - reproducible-research
+  - workflow
+status: apply_manually_after_repository_migration
+

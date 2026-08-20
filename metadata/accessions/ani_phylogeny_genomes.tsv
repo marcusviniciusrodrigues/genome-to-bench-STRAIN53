@@ -1,0 +1,6 @@
+analysis	taxon_id	strain	assembly_accession	included	status
+ANI	LABIM53	Bacillus nitratireducens LABIM53	JBLFHU000000000	true	assembly accession known
+ANI	TO_CONFIRM	TO_CONFIRM	TO_CONFIRM	true	TO_CONFIRM
+phylogeny	LABIM53	Bacillus nitratireducens LABIM53	JBLFHU000000000	true	marker accessions in marker_sequences.tsv
+phylogeny	TO_CONFIRM	TO_CONFIRM	TO_CONFIRM	true	TO_CONFIRM
+

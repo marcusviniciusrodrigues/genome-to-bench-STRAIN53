@@ -9,9 +9,9 @@ Per the Methods: low-quality bases and adapters removed with a **Phred quality c
 
 ```bash
 trimmomatic PE -phred33 \
-  data/reads/STRAIN53_R1.fastq.gz data/reads/STRAIN53_R2.fastq.gz \
-  results/trimmed/STRAIN53_R1.paired.fq.gz results/trimmed/STRAIN53_R1.unpaired.fq.gz \
-  results/trimmed/STRAIN53_R2.paired.fq.gz results/trimmed/STRAIN53_R2.unpaired.fq.gz \
+  data/reads/LABIM53_R1.fastq.gz data/reads/LABIM53_R2.fastq.gz \
+  results/trimmed/LABIM53/LABIM53_R1.paired.fq.gz results/trimmed/LABIM53/LABIM53_R1.unpaired.fq.gz \
+  results/trimmed/LABIM53/LABIM53_R2.paired.fq.gz results/trimmed/LABIM53/LABIM53_R2.unpaired.fq.gz \
   ILLUMINACLIP:<adapters.fa>:2:30:10 \
   SLIDINGWINDOW:4:30 \
   LEADING:30 TRAILING:30 MINLEN:36
@@ -23,12 +23,12 @@ trimmomatic PE -phred33 \
 
 ```bash
 spades.py \
-  -1 results/trimmed/STRAIN53_R1.paired.fq.gz \
-  -2 results/trimmed/STRAIN53_R2.paired.fq.gz \
-  -o results/spades_STRAIN53 \
+  -1 results/trimmed/LABIM53/LABIM53_R1.paired.fq.gz \
+  -2 results/trimmed/LABIM53/LABIM53_R2.paired.fq.gz \
+  -o results/spades_LABIM53 \
   --careful -t <threads> -m <memory_GB>
 ```
 
 **Reported outcome:** the initial SPAdes assembly comprised **425 contigs** (later refined — see stage 3).
 
-The primary output is `results/spades_STRAIN53/contigs.fasta`, which is the input to taxonomic identification (stage 2) and refinement (stage 3).
+The primary output is `results/spades_LABIM53/contigs.fasta`, which is the input to taxonomic identification (stage 2) and refinement (stage 3). The runnable script obtains these paths from `config/config.yaml` and `config/samples.tsv`.

@@ -1,0 +1,6 @@
+target_id	trait_category	metabolite	gene_name	uniprot_accession	source_organism	reference_evidence	expected_mechanism	validation_assay	manuscript_link	status
+PGPR-001	organic acid production	acetic acid	ackA	TO_CONFIRM	TO_CONFIRM	TO_CONFIRM	acetate kinase pathway	HPLC and nutrient-solubilisation assays	Table 2; Figure 4	TO_CONFIRM
+PGPR-002	organic acid production	citric acid	gltA	TO_CONFIRM	TO_CONFIRM	TO_CONFIRM	citrate synthase pathway	HPLC and nutrient-solubilisation assays	Table 2; Figure 4	TO_CONFIRM
+PGPR-003	organic acid production	malic acid	mdh	TO_CONFIRM	TO_CONFIRM	TO_CONFIRM	malate dehydrogenase pathway	HPLC and nutrient-solubilisation assays	Table 2; Figure 4	TO_CONFIRM
+PGPR-004	organic acid production	oxaloacetate-derived acids	ppc	TO_CONFIRM	TO_CONFIRM	TO_CONFIRM	phosphoenolpyruvate carboxylase pathway	HPLC and nutrient-solubilisation assays	Table 2; Figure 4	TO_CONFIRM
+

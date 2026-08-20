@@ -1,0 +1,10 @@
+figure	panel	description	final_file	source_output	software	parameters	status
+1	all	Circular comparison of LABIM53 with 12 genomes	TO_CONFIRM	TO_CONFIRM	Proksee/CGView	TO_CONFIRM	asset_missing
+2	A	ANI heatmap	TO_CONFIRM	results/aniclustermap	ANIclustermap	config/config.yaml	asset_missing
+2	B	Bayesian concatenated 16S + gyrB phylogeny	TO_CONFIRM	results/trees/16S_gyrB.concat.nex	MrBayes	config/config.yaml	asset_missing
+2	C	Maximum-likelihood concatenated 16S + gyrB phylogeny	TO_CONFIRM	results/markers/16S_gyrB.concat.fasta	IQ-TREE	config/config.yaml	asset_missing
+3	A	Pan-genome presence/absence matrix	TO_CONFIRM	results/roary/gene_presence_absence.csv	Roary	config/config.yaml	asset_missing
+3	B	COG functional categories	TO_CONFIRM	results/cogclassifier_LABIM53	COGclassifier	config/config.yaml	asset_missing
+4	A	NBRIP medium; phosphate solubilisation	TO_CONFIRM	bench assay image	image acquisition TO_CONFIRM	NBRIP	asset_missing
+4	B	Aleksandrov medium; potassium solubilisation	TO_CONFIRM	bench assay image	image acquisition TO_CONFIRM	Aleksandrov	asset_missing
+

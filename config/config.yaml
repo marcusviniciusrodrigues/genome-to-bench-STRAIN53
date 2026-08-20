@@ -1,0 +1,45 @@
+project:
+  strain_name: LABIM53
+  focal_sample_id: LABIM53
+
+resources:
+  threads: 8
+  memory_gb: 32
+
+paths:
+  data_dir: data
+  results_dir: results
+  reference_genomes_dir: data/reference_genomes
+  ani_genomes_dir: data/genomes_cereus_group
+  pangenome_genomes_dir: data/genomes_pangenome
+  marker_16s: data/markers/16S.fasta
+  marker_gyrb: data/markers/gyrB.fasta
+  pgpr_targets: data/mined_genes/pgpr_targets.faa
+
+trimming:
+  adapters: adapters.fa
+  phred_cutoff: 30
+  sliding_window: 4
+  minimum_length: 36
+
+assembly:
+  scaffolding_reference: data/reference_genomes/B_nitratireducens_BM02.fasta
+  busco_lineage: bacillales_odb10
+
+phylogeny:
+  iqtree_model: MFP
+  bootstrap_replicates: 1000
+  mrbayes_nst: 6
+  mrbayes_rates: gamma
+  mrbayes_generations: 1000000
+  mrbayes_sample_frequency: 1000
+  mrbayes_burnin_fraction: 0.25
+  run_mrbayes: false
+
+pangenome:
+  reported_gene_clusters: 12047
+  reported_core: 3513
+  reported_accessory: 3558
+  reported_strain_specific: 4976
+  roary_output: results/roary/gene_presence_absence.csv
+

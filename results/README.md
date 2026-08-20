@@ -4,10 +4,10 @@ Outputs are **not** version-controlled. Each stage writes here:
 
 | Stage | Output |
 | --- | --- |
-| 1 | `trimmed/`, `spades_STRAIN53/` |
-| 2 | `gtdbtk_STRAIN53/`, `aniclustermap/`, `markers/`, `trees/` |
-| 3 | `medusa_STRAIN53.fasta`, `ragtag_STRAIN53/`, `quast_STRAIN53/`, BUSCO output |
-| 4 | `prokka/`, `roary/`, `cogclassifier_STRAIN53/` |
-| 5 | `blastdb/`, `tblastn_STRAIN53.tsv` |
+| 1 | `trimmed/LABIM53/`, `spades_LABIM53/` |
+| 2 | `gtdbtk_LABIM53/`, `aniclustermap/`, `markers/`, `trees/` |
+| 3 | `medusa_LABIM53.fasta`, `ragtag_LABIM53/`, `quast_LABIM53/`, BUSCO output |
+| 4 | `prokka/`, `roary/`, `cogclassifier_LABIM53/` |
+| 5 | `blastdb/`, `tblastn_LABIM53.tsv` |
 
-Keep final figures/tables (Fig 1–4, Tables 1–2) under a `figures/` subfolder if you want them tracked.
+Keep large intermediate outputs here. Final manuscript assets and their provenance belong in the version-controlled top-level `figures/` and `tables/` directories.

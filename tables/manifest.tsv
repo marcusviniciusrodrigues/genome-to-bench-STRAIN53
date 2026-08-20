@@ -1,0 +1,4 @@
+table	description	final_file	source_output	validation	status
+1	PlasFlow per-scaffold predicted classifications	TO_CONFIRM	TO_CONFIRM	36 submitted rows; class counts verified against source	asset_missing
+2	PGPR target-gene tBLASTn hits	TO_CONFIRM	results/tblastn_LABIM53.tsv	linked to metadata/pgpr_gene_targets.tsv	asset_missing
+

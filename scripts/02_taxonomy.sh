@@ -1,23 +1,54 @@
 #!/usr/bin/env bash
-# Stage 2 — GTDB-Tk + ANIclustermap + marker alignments/trees. See docs/02_*
-# (BLASTn vs GenBank and MEGA/PhyloSuite/iTOL/FigTree steps are web/GUI.)
+# Stage 2 - GTDB-Tk + ANIclustermap + concatenated 16S/gyrB phylogeny.
 set -euo pipefail
-THREADS=${THREADS:-8}
-mkdir -p results/gtdbtk_STRAIN53 results/aniclustermap results/markers results/trees
+source "$(dirname "$0")/common.sh"
 
-gtdbtk classify_wf --genome_dir results/spades_STRAIN53/ --extension fasta \
-  --out_dir results/gtdbtk_STRAIN53 --cpus "$THREADS"
+SAMPLE_ID=${SAMPLE_ID:-$(config_get project.focal_sample_id)}
+THREADS=${THREADS:-$(config_get resources.threads)}
+RESULTS_DIR=$(config_get paths.results_dir)
+ANI_DIR=$(config_get paths.ani_genomes_dir)
+MARKER_16S=$(config_get paths.marker_16s)
+MARKER_GYRB=$(config_get paths.marker_gyrb)
+SPADES_DIR="$RESULTS_DIR/spades_$SAMPLE_ID"
+GTDB_DIR="$RESULTS_DIR/gtdbtk_$SAMPLE_ID"
+MARKER_DIR="$RESULTS_DIR/markers"
+TREE_DIR="$RESULTS_DIR/trees"
+CONCAT_FASTA="$MARKER_DIR/16S_gyrB.concat.fasta"
+CONCAT_NEXUS="$TREE_DIR/16S_gyrB.concat.nex"
 
-# OrthoANI heatmap (Fig 2A) — directory of B. cereus-group genomes (FASTA)
-ANIclustermap -i data/genomes_cereus_group/ -o results/aniclustermap \
+mkdir -p "$GTDB_DIR" "$RESULTS_DIR/aniclustermap" "$MARKER_DIR" "$TREE_DIR"
+
+gtdbtk classify_wf --genome_dir "$SPADES_DIR" --extension fasta \
+  --out_dir "$GTDB_DIR" --cpus "$THREADS"
+
+# OrthoANI heatmap (Figure 2A).
+ANIclustermap -i "$ANI_DIR" -o "$RESULTS_DIR/aniclustermap" \
   --cmap_colors green,yellow,red
 
-# Marker alignments (CLI alternative to MAFFT online)
-mafft --auto data/markers/16S.fasta  > results/markers/16S.aln.fasta
-mafft --auto data/markers/gyrB.fasta > results/markers/gyrB.aln.fasta
+# Align markers independently, then concatenate identical taxon sets.
+mafft --auto "$MARKER_16S" > "$MARKER_DIR/16S.aln.fasta"
+mafft --auto "$MARKER_GYRB" > "$MARKER_DIR/gyrB.aln.fasta"
+python scripts/concatenate_markers.py \
+  --alignment "16S=$MARKER_DIR/16S.aln.fasta" \
+  --alignment "gyrB=$MARKER_DIR/gyrB.aln.fasta" \
+  --fasta-out "$CONCAT_FASTA" \
+  --nexus-out "$CONCAT_NEXUS" \
+  --mrbayes-nst "$(config_get phylogeny.mrbayes_nst)" \
+  --mrbayes-rates "$(config_get phylogeny.mrbayes_rates)" \
+  --mrbayes-generations "$(config_get phylogeny.mrbayes_generations)" \
+  --mrbayes-sample-frequency "$(config_get phylogeny.mrbayes_sample_frequency)" \
+  --mrbayes-burnin-fraction "$(config_get phylogeny.mrbayes_burnin_fraction)"
 
-# Maximum likelihood (Fig 2C)
-iqtree -s results/markers/16S.aln.fasta -m MFP -bb 1000 -nt AUTO -pre results/trees/16S_ml
-# Bayesian inference (Fig 2B): prepare results/trees/16S.nex with a mrbayes block, then:
-# mb results/trees/16S.nex
+# Maximum likelihood (Figure 2C) uses the concatenated 16S + gyrB alignment.
+iqtree -s "$CONCAT_FASTA" -m "$(config_get phylogeny.iqtree_model)" \
+  -bb "$(config_get phylogeny.bootstrap_replicates)" -nt AUTO \
+  -pre "$TREE_DIR/16S_gyrB_ml"
+
+# Bayesian inference (Figure 2B) uses the same concatenated characters.
+# Review the model and MCMC settings in config/config.yaml before enabling.
+if [[ "${RUN_MRBAYES:-$(config_get phylogeny.run_mrbayes)}" == "true" ]]; then
+  mb "$CONCAT_NEXUS"
+else
+  echo "[note] MrBayes input written to $CONCAT_NEXUS; set RUN_MRBAYES=true after verifying settings."
+fi
 echo "[done] stage 2"

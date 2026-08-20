@@ -1,0 +1,6 @@
+target_id	gene_name	uniprot_accession	source_organism	sequence_file	status
+PGPR-001	ackA	TO_CONFIRM	TO_CONFIRM	data/mined_genes/pgpr_targets.faa	TO_CONFIRM
+PGPR-002	gltA	TO_CONFIRM	TO_CONFIRM	data/mined_genes/pgpr_targets.faa	TO_CONFIRM
+PGPR-003	mdh	TO_CONFIRM	TO_CONFIRM	data/mined_genes/pgpr_targets.faa	TO_CONFIRM
+PGPR-004	ppc	TO_CONFIRM	TO_CONFIRM	data/mined_genes/pgpr_targets.faa	TO_CONFIRM
+
