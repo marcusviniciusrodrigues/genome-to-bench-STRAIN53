@@ -1,0 +1,3 @@
+sample_id	strain_name	read_1	read_2	assembly_accession
+LABIM53	Bacillus nitratireducens LABIM53	data/reads/LABIM53_R1.fastq.gz	data/reads/LABIM53_R2.fastq.gz	JBLFHU000000000
+
