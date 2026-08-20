@@ -1,15 +1,15 @@
 # 00 — Overview
 
-This workflow links **genome-based predictions** to **bench validation** to prioritise candidate biofertilizer (PGPR) strains, demonstrated on *Bacillus nitratireducens* STRAIN53.
+This workflow links **genome-based predictions** to **bench validation** to prioritise candidate biofertilizer (PGPR) strains, demonstrated on *Bacillus nitratireducens* LABIM53.
 
 The stages are:
 
 1. [Preprocessing & assembly](01_preprocessing_and_assembly.md) — Trimmomatic → SPAdes
-2. [Taxonomic identification](02_taxonomic_identification.md) — BLASTn, GTDB-Tk, ANIclustermap, 16S/*gyrB* phylogenies (IQ-TREE, MrBayes)
+2. [Taxonomic identification](02_taxonomic_identification.md) — BLASTn, GTDB-Tk, ANIclustermap and concatenated 16S/*gyrB* phylogenies (IQ-TREE, MrBayes)
 3. [Assembly refinement & QC](03_assembly_refinement_and_qc.md) — MeDuSa, RagTag, Proksee/CGView, CLC, PlasFlow, QUAST, BUSCO
 4. [Pan-genome & functional annotation](04_pangenome_and_functional_annotation.md) — Prokka, Roary, COGclassifier
 5. [Gene mining](05_gene_mining.md) — UniProt + tBLASTn for PGPR-related genes
-6. [In vitro validation](06_invitro_validation.md) — IAA (Salkowski), HPLC organic acids, NBRIP/Aleksandrov solubilization
+6. [In vitro validation](06_invitro_validation.md) — IAA (Salkowski), HPLC organic acids, NBRIP/Aleksandrov solubilisation
 
 ## Inputs you need
 
@@ -27,10 +27,10 @@ The stages are:
 | --- | --- |
 | Fig 1 (circular comparison) | 3 — Proksee/CGView |
 | Fig 2A (ANI heatmap) | 2 — ANIclustermap |
-| Fig 2B (Bayesian 16S tree) | 2 — MrBayes |
-| Fig 2C (ML 16S tree) | 2 — IQ-TREE |
+| Fig 2B (Bayesian concatenated 16S + *gyrB* tree) | 2 — MrBayes |
+| Fig 2C (ML concatenated 16S + *gyrB* tree) | 2 — IQ-TREE |
 | Fig 3A (pan-genome matrix) | 4 — Roary |
 | Fig 3B (COG classification) | 4 — COGclassifier |
-| Fig 4 (solubilization plates) | 6 — bench assays |
+| Fig 4A (NBRIP, phosphate) / 4B (Aleksandrov, potassium) | 6 — bench assays |
 | Table 1 (chromosome/plasmid) | 3 — PlasFlow |
 | Table 2 (mined genes) | 5 — tBLASTn |

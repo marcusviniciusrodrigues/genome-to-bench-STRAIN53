@@ -15,9 +15,9 @@ A representative DNA fragment from the assembly was queried with **BLASTn** at N
 
 ```bash
 gtdbtk classify_wf \
-  --genome_dir results/spades_STRAIN53/ \
+  --genome_dir results/spades_LABIM53/ \
   --extension fasta \
-  --out_dir results/gtdbtk_STRAIN53 \
+  --out_dir results/gtdbtk_LABIM53 \
   --cpus <threads>
 ```
 
@@ -38,24 +38,36 @@ Produces the OrthoANI heatmap + hierarchical clustering used in **Figure 2A**.
 
 ## 2.4 Marker-gene phylogenies (16S rRNA + *gyrB*) → **Fig 2B / 2C**
 
-1. **Extract** 16S rRNA and *gyrB* sequences from the genomes.
-2. **Align** with MAFFT (online service used in the paper; CLI equivalent below):
+1. **Extract** 16S rRNA and *gyrB* sequences from the same set of genomes. Use identical FASTA identifiers for both markers and record the accessions in `metadata/accessions/marker_sequences.tsv`.
+2. **Align** each marker with MAFFT (online service used in the paper; CLI equivalent below):
    ```bash
    mafft --auto data/markers/16S.fasta > results/markers/16S.aln.fasta
    mafft --auto data/markers/gyrB.fasta > results/markers/gyrB.aln.fasta
    ```
-3. **Inspect/edit** alignments in MEGA X (GUI).
-4. **Maximum likelihood** — IQ-TREE (run via PhyloSuite in the paper):
+3. **Inspect/edit** both alignments in MEGA X (GUI), preserving identical taxon sets.
+4. **Concatenate** the edited alignments by FASTA identifier. The helper fails if the taxon sets differ and emits the same character matrix as FASTA and NEXUS:
    ```bash
-   iqtree -s results/markers/16S.aln.fasta -m MFP -bb 1000 -nt AUTO \
-     -pre results/trees/16S_ml
+   python scripts/concatenate_markers.py \
+     --alignment 16S=results/markers/16S.aln.fasta \
+     --alignment gyrB=results/markers/gyrB.aln.fasta \
+     --fasta-out results/markers/16S_gyrB.concat.fasta \
+     --nexus-out results/trees/16S_gyrB.concat.nex
+   ```
+5. **Maximum likelihood** — IQ-TREE (run via PhyloSuite in the paper) on the concatenated input:
+   ```bash
+   iqtree -s results/markers/16S_gyrB.concat.fasta -m MFP -bb 1000 -nt AUTO \
+     -pre results/trees/16S_gyrB_ml
    ```
    → **Figure 2C**
-5. **Bayesian inference** — MrBayes v3.2.1 (MCMC with Gibbs sampling; posterior probabilities):
+6. **Bayesian inference** — MrBayes v3.2.1 on the NEXUS representation of the same concatenated characters:
    ```bash
-   mb results/trees/16S.nex   # NEXUS with an mrbayes block (lset/mcmc settings)
+   mb results/trees/16S_gyrB.concat.nex
    ```
    → **Figure 2B**
-6. **Visualise/edit** with iTOL (v6–7) and FigTree v1.4.4.
+7. **Visualise/edit** with iTOL (v6–7) and FigTree v1.4.4.
 
-> Substitution model and MCMC generations follow the PhyloSuite/MrBayes settings you used; set them in the IQ-TREE `-m` flag and the MrBayes block. Node values in Fig 2B are posterior probabilities; in Fig 2C, bootstrap support.
+> Substitution model and MCMC settings must be verified against the original analysis before enabling MrBayes in `config/config.yaml`. Node values in Figure 2B are posterior probabilities; in Figure 2C, bootstrap support. Both figures must use the concatenated 16S + *gyrB* taxon-by-character matrix.
+
+## 2.5 dDDH scope
+
+Digital DNA-DNA hybridisation (dDDH) is not documented by an archived input, method or output in this repository. It is therefore not part of the supported workflow and no dDDH result should be inferred from these files. Remove any dDDH claim from the manuscript Discussion unless the missing Methods, Results and output provenance are supplied together.
