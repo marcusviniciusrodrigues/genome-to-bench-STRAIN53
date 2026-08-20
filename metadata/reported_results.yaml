@@ -1,0 +1,26 @@
+pangenome:
+  gene_clusters: 12047
+  core: 3513
+  accessory: 3558
+  strain_specific: 4976
+  validation: pending_original_roary_output
+
+assembly:
+  scaffolds: 36
+  total_bp: 5671654
+  largest_scaffold_bp: 5190595
+  l50: 1
+  gc_percent: 35.2
+  validation: reported_in_documentation
+
+plasflow:
+  submitted_sequences: 36
+  predicted_chromosome_count: null
+  predicted_plasmid_count: null
+  unclassified_count: null
+  validation: pending_table_1_and_original_plasflow_output
+
+dddh:
+  included_in_workflow: false
+  reason: no archived method or output supplied
+
